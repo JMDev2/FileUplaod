@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "610963287530",
+    "firebase_url": "https://fileupload-2aa32-default-rtdb.firebaseio.com",
+    "project_id": "fileupload-2aa32",
+    "storage_bucket": "fileupload-2aa32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610963287530:android:187471a8bd06be74ad1693",
+        "android_client_info": {
+          "package_name": "com.example.fileupload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610963287530-7himbf6sdr1ctpehdmsa28n166btjfrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU-Gfi0Extglmesk4iIRKwLkKVG7t_9rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610963287530-7himbf6sdr1ctpehdmsa28n166btjfrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
