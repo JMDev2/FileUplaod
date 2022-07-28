@@ -48,6 +48,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mButton.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        mSignUpProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -106,6 +107,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
+                                        Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+                                        startActivity(intent);
                                         Toast.makeText(CreateAccountActivity.this, "user has been registered", Toast.LENGTH_LONG).show();
                                         mSignUpProgressBar.setVisibility(View.VISIBLE);
                                     }else {

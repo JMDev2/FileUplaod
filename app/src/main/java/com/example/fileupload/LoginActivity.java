@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mLoginPassword;
     private Button mLoginButton;
     private ProgressBar mProgressBar;
+    private TextView mFprgotPassowrd;
 
     private FirebaseAuth mAuth;
     private ProgressBar mProgressbar;
@@ -39,10 +40,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLoginPassword = (EditText) findViewById(R.id.login_password);
         mLoginButton = (Button) findViewById(R.id.login_button);
         mProgressbar = (ProgressBar) findViewById(R.id.progressBar);
+        mFprgotPassowrd = (TextView) findViewById(R.id.forgot_password);
         mText.setOnClickListener(this);
         mLoginButton.setOnClickListener(this);
+        mFprgotPassowrd.setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();    }
+        mAuth = FirebaseAuth.getInstance();
+        mProgressbar.setVisibility(View.GONE);
+    }
 
     @Override
     public void onClick(View view) {
@@ -52,6 +57,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if(view == mLoginButton){
             userLogin();
+        }
+        if(view == mFprgotPassowrd){
+            Intent intent = new Intent(LoginActivity.this, ForgortPassword.class);
+            startActivity(intent);
         }
 
 
@@ -91,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Failed to Login", Toast.LENGTH_LONG).show();
+                    mProgressbar.setVisibility(View.GONE);
                 }
             }
         });
