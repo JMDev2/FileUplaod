@@ -122,14 +122,14 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/upload_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/uploads" />
     </androidx.cardview.widget.CardView>
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/file_name"
         android:layout_width="305dp"
         android:layout_height="50dp"
         android:layout_marginStart="26dp"
@@ -140,21 +140,34 @@
         android:hint="File Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toStartOf="@+id/upload_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/upload_button"
         android:layout_width="51dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="28dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/file_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toEndOf="@+id/file_name"
+        app:layout_constraintTop_toTopOf="@+id/file_name"
         app:srcCompat="@drawable/ic_baseline_send_24" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="249dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/file_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
