@@ -10,6 +10,9 @@
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_files.xml" value="0.17889492753623187" />
+        <entry key="app/src/main/res/layout/activity_view_pdf.xml" value="0.17889492753623187" />
+        <entry key="app/src/main/res/layout/uploadsfile.xml" value="0.17889492753623187" />
       </map>
     </option>
   </component>

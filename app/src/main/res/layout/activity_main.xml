@@ -60,8 +60,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="380dp"
-        android:layout_height="0dp"
+        android:layout_width="381dp"
+        android:layout_height="187dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="93dp"
         android:layout_marginBottom="144dp"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.25">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -98,24 +98,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView3"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="337dp"
-        android:layout_height="91dp"
-        android:layout_marginStart="32dp"
-        android:text="This one lets you upload all you files remotely. It also helps you retrieve them at your convinience."
-        android:textColor="#2196F3"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
-        android:layout_width="366dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="111dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="211dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +131,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/upload_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView4"
+        app:layout_constraintVertical_bias="0.18" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/upload_button"
@@ -159,15 +149,31 @@
 
     <TextView
         android:id="@+id/status"
+        android:layout_width="288dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="249dp"
+        android:layout_marginBottom="41dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/file_name" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="249dp"
-        android:text="TextView"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="16dp"
+        android:text="Click to View The Uploads"
+        android:textColor="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/file_name" />
+        app:layout_constraintTop_toBottomOf="@+id/file_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

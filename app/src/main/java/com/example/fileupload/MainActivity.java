@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText mFileName;
     private FloatingActionButton mSubmitButton;
     private TextView status;
+    private TextView textView;
 
     String downloadUrl = "";
 
@@ -49,9 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFileName = (EditText) findViewById(R.id.file_name);
         mSubmitButton = (FloatingActionButton) findViewById(R.id.upload_button);
         status = (TextView) findViewById(R.id.status);
+        textView = (TextView) findViewById(R.id.textView);
 
         mUploadImage.setOnClickListener(this);
         mSubmitButton.setOnClickListener(this);
+        textView.setOnClickListener(this);
 
         mSubmitButton.setEnabled(false);
 
@@ -95,13 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void uploadFile(Uri data) {
         StorageReference sRef = mStorageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
         sRef.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        status.setText("File Upload Successfully");
+        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                status.setText("File Upload Successfully");
 
-                        Upload upload = new Upload(mFileName.getText().toString(), taskSnapshot.getUploadSessionUri().toString().toString());
-                        mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
+                Upload upload = new Upload(mFileName.getText().toString(), taskSnapshot.getUploadSessionUri().toString().toString());
+                mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -136,6 +141,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.upload_button:
                 getPDF();
                 break;
+
+            case R.id.textView:
+                Intent i = new Intent(MainActivity.this, ViewPdfActivity.class);
+                startActivity(i);
+                break;
+
 
 
         }
