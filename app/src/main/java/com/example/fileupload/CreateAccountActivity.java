@@ -23,6 +23,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private TextView signupText;
     private EditText mUserName;
     private EditText mEmail;
+    private EditText mCountry;
+    private EditText mCity;
     private EditText mPassword;
     private EditText mConfirmPassword;
     private Button mButton;
@@ -40,6 +42,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         signupText = (TextView) findViewById(R.id.signup_text);
         mUserName = (EditText) findViewById(R.id.signup_username);
         mEmail = (EditText) findViewById(R.id.signup_email);
+        mCountry = (EditText) findViewById(R.id.signup_country1);
+        mCity = (EditText) findViewById(R.id.signup_city);
         mPassword = (EditText) findViewById(R.id.signup_password);
         mConfirmPassword = (EditText) findViewById(R.id.signup_confirmpassword);
         mButton = (Button) findViewById(R.id.login_button);
@@ -65,6 +69,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private void registerUser() {
         String myUserName = mUserName.getText().toString().trim();
         String myEmail = mEmail.getText().toString().trim();
+        String myCountry = mCountry.getText().toString().trim();
+        String myCity = mCity.getText().toString().trim();
         String myPassword = mPassword.getText().toString().trim();
         String myConfirmPassword = mConfirmPassword.getText().toString().trim();
 
@@ -82,6 +88,16 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             mEmail.setError("Please provide a valid email");
             mEmail.requestFocus();
             return;
+        }
+        if(myCountry.isEmpty()){
+            mCountry.setError("Country Required");
+            mCountry.requestFocus();
+        }
+
+        if(myCity.isEmpty()){
+            mCity.setError("City Required");
+            mCity.requestFocus();
+
         }
         if(myPassword.isEmpty()){
             mPassword.setError("Password is required");
