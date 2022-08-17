@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mImageUpload;
+    private ImageView mFileUpload;
 
     String downloadUrl = "";
 
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mImageUpload = (ImageView) findViewById(R.id.uploadimage);
+        mFileUpload = (ImageView) findViewById(R.id.uploadfile);
 
         mImageUpload.setOnClickListener(this);
+        mFileUpload.setOnClickListener(this);
 
 
 
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+    //the logout methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -58,7 +63,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             logout();
             return true;
         }
+        if(id == R.id.action_profile){
+            profile();
+            return true;
+
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void profile() {
+        Intent userProfile = new Intent(MainActivity.this, UserProfile.class);
+        startActivity(userProfile);
     }
 
     private void logout() {

@@ -15,31 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FileUpload"
         tools:targetApi="31">
+        <activity android:name=".UserProfile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fileupload.MainActivity"></meta-data>
+        </activity>
         <activity
             android:name=".ViewImageFiles"
             android:exported="false" />
-
-        <activity
-            android:name=".UploadFileActivity">
+        <activity android:name=".UploadFileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fileupload.MainActivity">
-            </meta-data>
+                android:value="com.example.fileupload.MainActivity"></meta-data>
         </activity>
-
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
-
-
-        <activity
-            android:name=".UploadImageActivity">
+        <activity android:name=".UploadImageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fileupload.MainActivity">
-            </meta-data>
+                android:value="com.example.fileupload.MainActivity"></meta-data>
         </activity>
-
         <activity
             android:name=".ViewPdfActivity"
             android:exported="false" />
