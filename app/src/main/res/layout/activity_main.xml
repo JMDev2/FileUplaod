@@ -90,62 +90,6 @@
         app:layout_constraintStart_toStartOf="@+id/cardView4"
         app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
-    <EditText
-        android:id="@+id/file_name"
-        android:layout_width="305dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="136dp"
-        android:ems="10"
-        android:hint="File Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/upload_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/upload_button"
-        android:layout_width="51dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="28dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/file_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/file_name"
-        app:layout_constraintTop_toTopOf="@+id/file_name"
-        app:srcCompat="@drawable/ic_baseline_send_24" />
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="288dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="249dp"
-        android:layout_marginBottom="41dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_name" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="16dp"
-        android:text="Click to View The Uploads"
-        android:textColor="#2196F3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_name" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="150dp"
@@ -191,7 +135,7 @@
             android:id="@+id/uploadimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/uploads" />
+            app:srcCompat="@drawable/imageuploadicon" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
