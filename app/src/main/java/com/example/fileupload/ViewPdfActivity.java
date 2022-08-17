@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +23,7 @@ public class ViewPdfActivity extends AppCompatActivity {
     private ListView listView;
 
     DatabaseReference databaseReference;
-    List<Upload> uploadList;
+    List<FileUpload> uploadList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class ViewPdfActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //getting the upload
-                Upload upload = uploadList.get(i);
+                FileUpload upload = uploadList.get(i);
 
                 //Opening the upload file in browser using the upload url
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -58,7 +57,7 @@ public class ViewPdfActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Upload upload = postSnapshot.getValue(Upload.class);
+                    FileUpload upload = postSnapshot.getValue(FileUpload.class);
                     uploadList.add(upload);
                 }
 

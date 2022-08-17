@@ -40,7 +40,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/logindetails"
         android:layout_width="347dp"
         android:layout_height="300dp"
         android:layout_marginBottom="70dp"
@@ -157,7 +157,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/logindetails"
         app:layout_constraintVertical_bias="0.307" />
 
     <TextView

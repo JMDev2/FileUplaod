@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ForgortPassword extends AppCompatActivity {
+public class ViewImageFiles extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgort_password);
+        setContentView(R.layout.activity_view_image_files);
     }
 }

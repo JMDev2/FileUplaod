@@ -2,6 +2,7 @@ package com.example.fileupload;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mLoginButton;
     private ProgressBar mProgressBar;
     private TextView mFprgotPassowrd;
+    private CardView loginDetails;
 
     private FirebaseAuth mAuth;
     private ProgressBar mProgressbar;
@@ -41,13 +43,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLoginButton = (Button) findViewById(R.id.login_button);
         mProgressbar = (ProgressBar) findViewById(R.id.progressBar);
         mFprgotPassowrd = (TextView) findViewById(R.id.forgot_password);
+        loginDetails = (CardView) findViewById(R.id.logindetails);
         mText.setOnClickListener(this);
         mLoginButton.setOnClickListener(this);
         mFprgotPassowrd.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         mProgressbar.setVisibility(View.GONE);
+
+
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -59,12 +66,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             userLogin();
         }
         if(view == mFprgotPassowrd){
-            Intent intent = new Intent(LoginActivity.this, ForgortPassword.class);
+            Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
             startActivity(intent);
         }
 
 
     }
+
 
     private void userLogin() {
         String LoginEmail = mLoginEmail.getText().toString().trim();

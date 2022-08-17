@@ -1,15 +1,15 @@
 package com.example.fileupload;
 
-public class Upload {
+public class FileUpload {
     public String name;
     public String url;
 
-    public Upload(String name, String url) {
+    public FileUpload(String name, String url) {
         this.name = name;
         this.url = url;
     }
 
-    public Upload() {
+    public FileUpload() {
     }
 
     public String getName() {
