@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView mText;
@@ -30,6 +31,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private ProgressBar mProgressbar;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+
 
 
     @Override
@@ -48,8 +52,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLoginButton.setOnClickListener(this);
         mFprgotPassowrd.setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
+
         mProgressbar.setVisibility(View.GONE);
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
 
 
     }
@@ -71,7 +92,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+
+
     }
+
+
 
 
     private void userLogin() {
@@ -114,6 +139,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 }

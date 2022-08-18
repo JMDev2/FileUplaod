@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/gradientbackground.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.196" />
         <entry key="app/src/main/res/drawable/roundimage.xml" value="0.196" />
-        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_forgort_password.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />

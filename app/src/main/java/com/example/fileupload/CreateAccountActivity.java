@@ -24,7 +24,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private EditText mUserName;
     private EditText mEmail;
     private EditText mCountry;
-    private EditText mCity;
+    private EditText mPhone;
     private EditText mPassword;
     private EditText mConfirmPassword;
     private Button mButton;
@@ -43,7 +43,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mUserName = (EditText) findViewById(R.id.signup_username);
         mEmail = (EditText) findViewById(R.id.signup_email);
         mCountry = (EditText) findViewById(R.id.signup_country1);
-        mCity = (EditText) findViewById(R.id.signup_city);
+        mPhone = (EditText) findViewById(R.id.signup_phone);
         mPassword = (EditText) findViewById(R.id.signup_password);
         mConfirmPassword = (EditText) findViewById(R.id.signup_confirmpassword);
         mButton = (Button) findViewById(R.id.login_button);
@@ -70,7 +70,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String myUserName = mUserName.getText().toString().trim();
         String myEmail = mEmail.getText().toString().trim();
         String myCountry = mCountry.getText().toString().trim();
-        String myCity = mCity.getText().toString().trim();
+        String myPhone = mPhone.getText().toString().trim();
         String myPassword = mPassword.getText().toString().trim();
         String myConfirmPassword = mConfirmPassword.getText().toString().trim();
 
@@ -92,11 +92,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         if(myCountry.isEmpty()){
             mCountry.setError("Country Required");
             mCountry.requestFocus();
+            return;
         }
 
-        if(myCity.isEmpty()){
-            mCity.setError("City Required");
-            mCity.requestFocus();
+        if(myPhone.isEmpty()){
+            mPhone.setError("City Required");
+            mPhone.requestFocus();
+            return;
 
         }
         if(myPassword.isEmpty()){
@@ -115,7 +117,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    User user = new User(myUserName, myEmail);
+                    User user = new User(myUserName, myEmail, myCountry, myPhone);
 
                     FirebaseDatabase.getInstance().getReference("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
