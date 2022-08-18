@@ -3,12 +3,17 @@ package com.example.fileupload;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +27,10 @@ public class UserProfile extends AppCompatActivity {
     TextView mPhone;
     TextView mCountry;
 
-    DatabaseReference databaseReference;
+    private FirebaseDatabase database;
+    private String email;
+
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -30,26 +38,34 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+
         mProfilePicture = (ImageView) findViewById(R.id.user_image);
-        mUserName = (TextView) findViewById(R.id.user_name);
+        mUserName = (TextView) findViewById(R.id.username);
         mEmail = (TextView) findViewById(R.id.user_email);
         mPhone = (TextView) findViewById(R.id.user_phone);
         mCountry = (TextView) findViewById(R.id.user_country);
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("profile");
+        database = FirebaseDatabase.getInstance();
+        databaseReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.DATABASE_PROFILES).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot datasnapShot : snapshot.getChildren()) {
+                User user = snapshot.getValue(User.class);
 
-                    User user = snapshot.getValue(User.class);
+                        mUserName.setText(user.getUserName());
+                        mEmail.setText(user.getEmail());
+                        mPhone.setText(user.getPhone());
+                        mCountry.setText(user.getCountry());
 
-                    mUserName.setText(user.getUserName());
-                    mEmail.setText(user.getEmail());
-                    mCountry.setText(user.getCountry());
-                    mPhone.setText(user.getPhone());
-                }
+
+
 
             }
 

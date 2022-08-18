@@ -21,8 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -96,7 +100,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
             //if a file is selected
             if (data.getData() != null) {
                 //uploading the file
-                uploadFile(data.getData());
+                uploadFile(data.getData(), editTextFilename.getText().toString());
             } else {
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
             }
@@ -107,27 +111,13 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
     //this method is uploading the file
     //the code is same as the previous tutorial
     //so we are not explaining it
-    private void uploadFile(Uri data) {
+    private void uploadFile(Uri data, String filename) {
         progressBar.setVisibility(View.VISIBLE);
-        StorageReference sRef = mStorageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
-        sRef.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @SuppressWarnings("VisibleForTests")
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        progressBar.setVisibility(View.GONE);
-                        textViewStatus.setText("File Uploaded Successfully");
+        StorageReference sRef = mStorageReference.child(Constants.STORAGE_PATH_UPLOADS + FirebaseAuth.getInstance().getCurrentUser().getUid()+ "/" + System.currentTimeMillis() + ".pdf");
 
-                        FileUpload upload = new FileUpload(editTextFilename.getText().toString(), taskSnapshot.getUploadSessionUri().toString());
-                        mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                })
+        UploadTask uploadTask = sRef.putFile(data);
+
+        Task<Uri> urlTask = uploadTask
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
                     @Override
@@ -135,7 +125,35 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                         double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                         textViewStatus.setText((int) progress + "% Uploading...");
                     }
-                });
+                }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return sRef.getDownloadUrl();
+            }
+
+
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    FileUpload fileUpload = new FileUpload(filename, downloadUri.toString());
+
+                    //saves the download url
+                    FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(fileUpload);
+                } else {
+
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
 
     }
 
