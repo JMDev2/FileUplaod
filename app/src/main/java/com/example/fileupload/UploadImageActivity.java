@@ -18,8 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,6 +31,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 
 public class UploadImageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -94,7 +99,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadFile() {
+    private void uploadFile(Uri data, String imagename) {
         //checking if file is available
         if (filePath != null) {
             //displaying progress dialog while image is uploading
@@ -105,40 +110,71 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
             //getting the storage reference
             StorageReference sRef = storageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
 
-            //adding the file to reference
-            sRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //dismissing the progress dialog
-                            progressDialog.dismiss();
+            UploadTask uploadTask = sRef.putFile(data);
 
-                            //displaying success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
 
-                            //creating the upload object to store uploaded image details
-                            ImageUpload upload = new ImageUpload(editTextName.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
-
-                            //adding an upload to firebase database
-                            String uploadId = mDatabase.push().getKey();
-                            mDatabase.child(uploadId).setValue(upload);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
+            // Register observers to listen for when the download is done or if it fails
+            Task<Uri> urlTask = uploadTask
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //displaying the upload progress
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    //displaying the upload progress
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                    progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                }
+            }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return sRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString());
+                        FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(imageUpload);
+
+
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
+                }
+            });
+
+            //adding the file to reference
+//            sRef.putFile(filePath)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            //dismissing the progress dialog
+//                            progressDialog.dismiss();
+//
+//                            //displaying success toast
+//                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+//
+//                            //creating the upload object to store uploaded image details
+//                            ImageUpload upload = new ImageUpload(editTextName.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
+//
+//                            //adding an upload to firebase database
+//                            String uploadId = mDatabase.push().getKey();
+//                            mDatabase.child(uploadId).setValue(upload);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception exception) {
+//                            progressDialog.dismiss();
+//                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+//                        }
+//                    })
+
         } else {
             //display an error if no file is selected
         }
@@ -150,7 +186,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         if (view == buttonChoose) {
             showFileChooser();
         } else if (view == buttonUpload) {
-            uploadFile();
+            uploadFile(filePath, editTextName.getText().toString());
 
         } else if (view == textViewShow) {
 
