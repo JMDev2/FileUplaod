@@ -108,7 +108,8 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
             progressDialog.show();
 
             //getting the storage reference
-            StorageReference sRef = storageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+            StorageReference sRef = storageReference.child(Constants.STORAGE_PATH_UPLOADS_images + FirebaseAuth.getInstance().getCurrentUser().getUid() + System.currentTimeMillis() + "." + getFileExtension(filePath));
+
 
             UploadTask uploadTask = sRef.putFile(data);
 
@@ -138,7 +139,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString());
-                        FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(imageUpload);
+                        FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(imageUpload);
 
 
                     } else {
