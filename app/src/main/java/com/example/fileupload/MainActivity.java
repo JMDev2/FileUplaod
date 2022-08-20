@@ -41,13 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImageUpload.setOnClickListener(this);
         mFileUpload.setOnClickListener(this);
 
-
-
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
     }
-
-
 
     //the logout methods
     @Override
