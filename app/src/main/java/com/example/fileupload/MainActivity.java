@@ -22,6 +22,8 @@ import com.google.firebase.storage.StorageReference;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mImageUpload;
     private ImageView mFileUpload;
+    private TextView viewPdf;
+    private TextView viewImage;
 
     String downloadUrl = "";
 
@@ -37,9 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mImageUpload = (ImageView) findViewById(R.id.uploadimage);
         mFileUpload = (ImageView) findViewById(R.id.uploadfile);
+        viewPdf = (TextView) findViewById(R.id.open_file);
+        viewImage = (TextView) findViewById(R.id.open_image);
 
         mImageUpload.setOnClickListener(this);
         mFileUpload.setOnClickListener(this);
+        viewPdf.setOnClickListener(this);
+        viewImage.setOnClickListener(this);
 
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
