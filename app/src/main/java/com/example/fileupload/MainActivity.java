@@ -12,11 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView mFileUpload;
     private TextView viewPdf;
     private TextView viewImage;
+    private TextView mTime;
+    StorageReference forestRef;
 
     String downloadUrl = "";
 
@@ -41,15 +45,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFileUpload = (ImageView) findViewById(R.id.uploadfile);
         viewPdf = (TextView) findViewById(R.id.open_file);
         viewImage = (TextView) findViewById(R.id.open_image);
+        mTime = (TextView) findViewById(R.id.time);
 
         mImageUpload.setOnClickListener(this);
         mFileUpload.setOnClickListener(this);
         viewPdf.setOnClickListener(this);
         viewImage.setOnClickListener(this);
 
-        mStorageReference = FirebaseStorage.getInstance().getReference();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
     }
+
+
+
 
     //the logout methods
     @Override

@@ -15,10 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView mText;
@@ -32,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     private ProgressBar mProgressbar;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+
 
 
 
@@ -57,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         mAuth = FirebaseAuth.getInstance();
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 

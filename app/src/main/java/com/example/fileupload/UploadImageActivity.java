@@ -161,7 +161,14 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         if (view == buttonChoose) {
             showFileChooser();
         } else if (view == buttonUpload) {
-            uploadFile(filePath, editTextName.getText().toString());
+            String textName = editTextName.getText().toString().trim();
+            if (textName.isEmpty()){
+                editTextName.setError("Please provide the File Name");
+                editTextName.requestFocus();
+                return;
+            }else {
+                uploadFile(filePath, editTextName.getText().toString());
+            }
 
         } else if (view == textViewShow) {
 

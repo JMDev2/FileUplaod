@@ -113,7 +113,8 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
             if (data.getData() != null) {
                 //uploading the file
 //                uploadFile(data.getData(), editTextFilename.getText().toString());
-            } else {
+            }
+            else {
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
             }
         }
@@ -187,7 +188,15 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case R.id.buttonUploadFile:
-                uploadFile(filePath, editTextFilename.getText().toString());
+                String textName = editTextFilename.getText().toString().trim();
+                if (textName.isEmpty()){
+                    editTextFilename.setError("Please provide the File Name");
+                    editTextFilename.requestFocus();
+                    return;
+                }
+                else {
+                    uploadFile(filePath, editTextFilename.getText().toString());
+                }
                 break;
             case R.id.textViewUploads:
                 startActivity(new Intent(this, ViewPdfActivity.class));
@@ -195,6 +204,8 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
 
         }
     }
+
+
 
 
 }
