@@ -101,6 +101,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(imageupload);
                 break;
 
+            case R.id.open_file:
+                Intent openFile = new Intent(MainActivity.this, ViewPdfActivity.class);
+                startActivity(openFile);
+                break;
+
+            case R.id.open_image:
+                Intent openImage = new Intent(MainActivity.this, ViewImageFiles.class);
+                startActivity(openImage);
+                break;
 
 
         }
