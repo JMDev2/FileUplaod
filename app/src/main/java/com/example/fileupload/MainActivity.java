@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -65,6 +66,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                                 Uri.parse("tel:" + "0700898437"));
                         startActivity(phoneIntent);
+                        break;
+
+                    case R.id.page_2:
+                        try {
+                            Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "mainajoseph964@gmail.com"));
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject");
+                            intent.putExtra(Intent.EXTRA_TEXT, "your_text");
+                            startActivity(intent);
+                        } catch(Exception e) {
+                            Toast.makeText(MainActivity.this, "Sorry...You don't have any mail app", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+
                         break;
 
 
