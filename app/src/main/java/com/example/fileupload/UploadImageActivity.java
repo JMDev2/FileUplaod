@@ -63,7 +63,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
         imageView = (ImageView) findViewById(R.id.imageView);
         editTextName = (EditText) findViewById(R.id.editText);
-        textViewShow = (TextView) findViewById(R.id.textViewShow);
+
 
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images);

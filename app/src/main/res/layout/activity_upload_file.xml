@@ -44,10 +44,10 @@
             android:text="Upload PDF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.846" />
+            app:layout_constraintVertical_bias="0.86" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -64,23 +64,6 @@
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/textViewStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No file selected"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/textViewUploads"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="View Uploads"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            />
-        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

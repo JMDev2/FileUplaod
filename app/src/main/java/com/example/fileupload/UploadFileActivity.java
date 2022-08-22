@@ -66,13 +66,12 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
 
         //getting the views
-        textViewStatus = (TextView) findViewById(R.id.textViewStatus);
+
         editTextFilename = (EditText) findViewById(R.id.editTextFileName);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         //attaching listeners to views
         findViewById(R.id.buttonUploadFile).setOnClickListener(this);
-        findViewById(R.id.textViewUploads).setOnClickListener(this);
         findViewById(R.id.choosefile).setOnClickListener(this);
     }
 
@@ -198,9 +197,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                     uploadFile(filePath, editTextFilename.getText().toString());
                 }
                 break;
-            case R.id.textViewUploads:
-                startActivity(new Intent(this, ViewPdfActivity.class));
-                break;
+
 
         }
     }

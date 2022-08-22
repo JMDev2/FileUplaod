@@ -1,8 +1,10 @@
 package com.example.fileupload;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView viewImage;
     private TextView mTime;
     StorageReference forestRef;
+
+    BottomNavigationView bottomNavigationView;
 
     String downloadUrl = "";
 
@@ -46,13 +51,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPdf = (TextView) findViewById(R.id.open_file);
         viewImage = (TextView) findViewById(R.id.open_image);
         mTime = (TextView) findViewById(R.id.time);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         mImageUpload.setOnClickListener(this);
         mFileUpload.setOnClickListener(this);
         viewPdf.setOnClickListener(this);
         viewImage.setOnClickListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_1:
+                        Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                                Uri.parse("tel:" + "0700898437"));
+                        startActivity(phoneIntent);
+                        break;
 
-    }
+
+                }
+                return true;
+            }
+        });
+
+
+
+        }
 
 
 
@@ -118,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
+
         }
+
+        }
+
+
 }
-}
+

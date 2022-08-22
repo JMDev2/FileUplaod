@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FileUpload</string>
+    <string name="text_label_1">View Pdf</string>
+    <string name="text_label_2">View Images</string>
 </resources>
