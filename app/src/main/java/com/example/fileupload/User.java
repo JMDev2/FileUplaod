@@ -2,13 +2,23 @@ package com.example.fileupload;
 
 public class User {
     public String userName, email, country, phone;
+    private int image;
 
-    public User(String userName, String email, String country, String phone) {
+    public User(String userName, String email, String country, String phone, int image) {
         this.userName = userName;
         this.email = email;
         this.country = country;
         this.phone = phone;
+        this.image = image;
     }
+
+//    public int getImage() {
+////        return image;
+//    }
+//
+//    public void setImage(int image) {
+////        this.image = image;
+//    }
 
     public String getUserName() {
         return userName;

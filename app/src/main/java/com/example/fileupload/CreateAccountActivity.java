@@ -4,20 +4,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView signupText;
@@ -29,8 +40,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private EditText mConfirmPassword;
     private Button mButton;
     private ProgressBar mSignUpProgressBar;
+    private ImageView mSignupImage;
 
     private FirebaseAuth mAuth;
+    StorageReference storageReference;
+
+    private static int RESULT_LOAD_IMG = 1;
 
 
 
@@ -48,8 +63,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mConfirmPassword = (EditText) findViewById(R.id.signup_confirmpassword);
         mButton = (Button) findViewById(R.id.login_button);
         mSignUpProgressBar = (ProgressBar) findViewById(R.id.signup_progressBar);
+        mSignupImage = (ImageView) findViewById(R.id.signup_image);
+
         signupText.setOnClickListener(this);
         mButton.setOnClickListener(this);
+        mSignupImage.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         mSignUpProgressBar.setVisibility(View.GONE);
@@ -64,6 +82,52 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         if(view == mButton){
             registerUser();
         }
+        if (view == mSignupImage){
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+//                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                mSignupImage.setImageURI(imageUri);
+
+                uploadImage(imageUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(CreateAccountActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(CreateAccountActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void uploadImage(Uri imageUri) {
+        StorageReference fileRef = storageReference.child("profile.jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(CreateAccountActivity.this, "success", Toast.LENGTH_LONG).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(CreateAccountActivity.this, "failed", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void registerUser() {
@@ -73,6 +137,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String myPhone = mPhone.getText().toString().trim();
         String myPassword = mPassword.getText().toString().trim();
         String myConfirmPassword = mConfirmPassword.getText().toString().trim();
+
+        int myImage = mSignupImage.getImageAlpha();
+
 
         if (myUserName.isEmpty()){
             mUserName.setError("User Name Required!");
@@ -117,7 +184,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    User user = new User(myUserName, myEmail, myCountry, myPhone);
+                    User user = new User(myUserName, myEmail, myCountry, myPhone, myImage);
 
                     FirebaseDatabase.getInstance().getReference("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
