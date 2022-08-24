@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +37,7 @@ public class UserProfile extends AppCompatActivity {
         email = intent.getStringExtra("email");
 
         mProfilePicture = (ImageView) findViewById(R.id.user_image);
-        mUserName = (TextView) findViewById(R.id.username);
+        mUserName = (TextView) findViewById(R.id.profilename);
         mEmail = (TextView) findViewById(R.id.user_email);
         mPhone = (TextView) findViewById(R.id.user_phone);
         mCountry = (TextView) findViewById(R.id.user_country);
