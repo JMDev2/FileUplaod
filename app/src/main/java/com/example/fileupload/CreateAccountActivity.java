@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,11 +25,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.UUID;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView signupText;
@@ -43,7 +46,14 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private ImageView mSignupImage;
 
     private FirebaseAuth mAuth;
-    StorageReference storageReference;
+
+
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+
+    private FirebaseDatabase firebaseDatabase;
+
 
     private static int RESULT_LOAD_IMG = 1;
 
@@ -71,6 +81,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         mAuth = FirebaseAuth.getInstance();
         mSignUpProgressBar.setVisibility(View.GONE);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
     }
 
     @Override
@@ -115,19 +129,33 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = storageReference.child("profile.jpg");
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(CreateAccountActivity.this, "success", Toast.LENGTH_LONG).show();
+        final String key = UUID.randomUUID().toString();
+        StorageReference ref = storage.getReference().child("images/" );
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+        UploadTask uploadTask = ref.putFile(imageUri);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(CreateAccountActivity.this, "failed", Toast.LENGTH_LONG).show();
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                } else {
+                    // Handle failures
+                    // ...
+                }
             }
         });
+
     }
 
     private void registerUser() {

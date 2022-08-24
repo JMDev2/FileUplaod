@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/maina/Desktop/projects/FileUplaod/app/src/main/res/drawable/gradientbackground.xml" value="0.207" />
+        <entry key="..\:/Users/maina/Desktop/projects/FileUplaod/app/src/main/res/layout/activity_create_account.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/maina/Desktop/projects/FileUplaod/app/src/main/res/layout/activity_user_profile.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
         <entry key="app/src/main/res/drawable/dottedlines.xml" value="0.196" />
         <entry key="app/src/main/res/drawable/gradientbackground.xml" value="0.189" />
