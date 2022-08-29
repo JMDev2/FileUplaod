@@ -70,7 +70,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
-        textViewShow.setOnClickListener(this);
+
     }
 
     private void showFileChooser() {
