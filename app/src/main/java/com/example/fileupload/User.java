@@ -1,10 +1,10 @@
 package com.example.fileupload;
 
 public class User {
-    public String userName, email, country, phone;
-    private int image;
+    private String userName, email, country, phone;
+    private String image;
 
-    public User(String userName, String email, String country, String phone, int image) {
+    public User(String userName, String email, String country, String phone, String image) {
         this.userName = userName;
         this.email = email;
         this.country = country;
@@ -12,11 +12,11 @@ public class User {
         this.image = image;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

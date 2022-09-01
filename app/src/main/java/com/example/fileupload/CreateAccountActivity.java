@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
@@ -56,6 +59,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 
     private static int RESULT_LOAD_IMG = 1;
+    private Uri imageUri;
+    private String downloadUrl;
 
 
 
@@ -111,12 +116,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         if (resultCode == RESULT_OK) {
             try {
-                final Uri imageUri = data.getData();
+                imageUri = data.getData();
 //                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
 //                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 mSignupImage.setImageURI(imageUri);
 
-                uploadImage(imageUri);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(CreateAccountActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -128,8 +133,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void uploadImage(Uri imageUri) {
-        final String key = UUID.randomUUID().toString();
+    private void uploadImage(String myUserName,String myEmail, String myCountry, String myPhone, Uri imageUri) {
+
         StorageReference ref = storage.getReference().child("images/" );
 
         UploadTask uploadTask = ref.putFile(imageUri);
@@ -149,6 +154,26 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
+
+
+                    User user = new User(myUserName, myEmail, myCountry, myPhone, downloadUri.toString());
+                    FirebaseDatabase.getInstance().getReference("users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        Toast.makeText(CreateAccountActivity.this, "user has been registered", Toast.LENGTH_LONG).show();
+                                        mSignUpProgressBar.setVisibility(View.VISIBLE);
+                                    }else {
+                                        Toast.makeText(CreateAccountActivity.this, "Failed to regsiter", Toast.LENGTH_LONG).show();
+                                        mSignUpProgressBar.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
+
                 } else {
                     // Handle failures
                     // ...
@@ -207,30 +232,19 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             return;
         }
 
+
+
         mSignUpProgressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(myEmail, myPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    User user = new User(myUserName, myEmail, myCountry, myPhone, myImage);
+                    uploadImage(myUserName,myEmail,myCountry,myPhone,imageUri);
+                    Toast.makeText(CreateAccountActivity.this, "User verified", Toast.LENGTH_LONG).show();
 
-                    FirebaseDatabase.getInstance().getReference("users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        Toast.makeText(CreateAccountActivity.this, "user has been registered", Toast.LENGTH_LONG).show();
-                                        mSignUpProgressBar.setVisibility(View.VISIBLE);
-                                    }else {
-                                        Toast.makeText(CreateAccountActivity.this, "Failed to regsiter", Toast.LENGTH_LONG).show();
-                                        mSignUpProgressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
 
+                }else {
+                    Log.e("CreateAccountActivity", "Reg Error", task.getException());
                 }
             }
         });

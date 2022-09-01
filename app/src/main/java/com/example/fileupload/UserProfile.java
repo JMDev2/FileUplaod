@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +23,7 @@ public class UserProfile extends AppCompatActivity {
     TextView mEmail;
     TextView mPhone;
     TextView mCountry;
+
 
     private FirebaseDatabase database;
     private String email;
@@ -43,6 +46,7 @@ public class UserProfile extends AppCompatActivity {
         mCountry = (TextView) findViewById(R.id.user_country);
 
 
+
         database = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase
                 .getInstance()
@@ -54,6 +58,7 @@ public class UserProfile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
 
+                Glide.with(getApplicationContext()).load(user).into(mProfilePicture);
                         mUserName.setText(user.getUserName());
                         mEmail.setText(user.getEmail());
                         mPhone.setText(user.getPhone());
