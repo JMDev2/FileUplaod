@@ -1,8 +1,7 @@
-package com.example.fileupload;
+package com.example.fileupload.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.fileupload.R;
+import com.example.fileupload.models.Constants;
+import com.example.fileupload.models.ImageUpload;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -84,6 +86,9 @@ public class ViewImageFiles extends AppCompatActivity {
             }
         });
 
+
+
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -93,6 +98,8 @@ public class ViewImageFiles extends AppCompatActivity {
                         .setPositiveButton("GOT IT", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push();
+
 
                             }
                         })

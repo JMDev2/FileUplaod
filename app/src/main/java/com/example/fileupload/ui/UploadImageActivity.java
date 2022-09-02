@@ -1,4 +1,4 @@
-package com.example.fileupload;
+package com.example.fileupload.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.fileupload.R;
+import com.example.fileupload.models.Constants;
+import com.example.fileupload.models.ImageUpload;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +31,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.io.IOException;
 
 public class UploadImageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,6 +44,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
     private EditText editTextName;
     private TextView textViewShow;
     private ImageView imageView;
+    private EditText imageDescription;
 
     //uri to store file
     private Uri filePath;
@@ -63,6 +63,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
         imageView = (ImageView) findViewById(R.id.imageView);
         editTextName = (EditText) findViewById(R.id.editText);
+        imageDescription = findViewById(R.id.image_description);
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -99,7 +100,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadFile(Uri data, String imagename) {
+    private void uploadFile(Uri data, String imagename, String imagedescription) {
         //checking if file is available
         if (filePath != null) {
             //displaying progress dialog while image is uploading
@@ -138,7 +139,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString());
+                        ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString(),imagedescription);
                         FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(imageUpload);
 
 
@@ -167,7 +168,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
                 editTextName.requestFocus();
                 return;
             }else {
-                uploadFile(filePath, editTextName.getText().toString());
+                uploadFile(filePath, editTextName.getText().toString(), imageDescription.getText().toString());
             }
 
         } else if (view == textViewShow) {

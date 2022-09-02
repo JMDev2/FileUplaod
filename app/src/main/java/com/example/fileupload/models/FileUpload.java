@@ -1,9 +1,10 @@
-package com.example.fileupload;
+package com.example.fileupload.models;
 
 public class FileUpload {
     private String name;
     private String description;
     private String url;
+    private String ID;
 
     public FileUpload(String name, String description, String url) {
         this.name = name;
@@ -14,6 +15,14 @@ public class FileUpload {
 
 
     public FileUpload() {
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getName() {

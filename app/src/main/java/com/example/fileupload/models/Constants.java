@@ -1,4 +1,4 @@
-package com.example.fileupload;
+package com.example.fileupload.models;
 
 public class Constants {
     public static final String STORAGE_PATH_UPLOADS = "uploads/";

@@ -1,4 +1,4 @@
-package com.example.fileupload;
+package com.example.fileupload.models;
 
 public class Date {
     private String date_time;

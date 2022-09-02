@@ -1,4 +1,4 @@
-package com.example.fileupload;
+package com.example.fileupload.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,19 +10,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.fileupload.R;
+import com.example.fileupload.acounts.LoginActivity;
+import com.example.fileupload.acounts.UserProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -144,12 +141,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.open_file:
-                Intent openFile = new Intent(MainActivity.this, ViewPdfActivity.class);
+                Intent openFile = new Intent(MainActivity.this, ViewPdfFilesActivity.class);
                 startActivity(openFile);
                 break;
 
             case R.id.open_image:
-                Intent openImage = new Intent(MainActivity.this, ViewImageFiles.class);
+                Intent openImage = new Intent(MainActivity.this, ViewImageActivity.class);
                 startActivity(openImage);
                 break;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".acounts.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -137,7 +137,7 @@
         android:layout_width="222dp"
         android:layout_height="47dp"
         android:layout_marginTop="170dp"
-        android:background="@color/blue"
+        android:backgroundTint="@color/blue"
         android:text="Button"
         android:visibility="visible"
         app:circularflow_defaultRadius="20dp"
