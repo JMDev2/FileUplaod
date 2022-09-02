@@ -45,6 +45,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
     //these are the views
     TextView textViewStatus;
     EditText editTextFilename;
+    EditText fileDescription;
     ProgressBar progressBar;
     Button mButton;
 
@@ -69,6 +70,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
 
         editTextFilename = (EditText) findViewById(R.id.editTextFileName);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        fileDescription = findViewById(R.id.description);
 
         //attaching listeners to views
         findViewById(R.id.buttonUploadFile).setOnClickListener(this);
@@ -123,7 +125,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
     //this method is uploading the file
     //the code is same as the previous tutorial
     //so we are not explaining it
-    private void uploadFile(Uri data, String filename) {
+    private void uploadFile(Uri data, String filename, String description) {
 //        progressBar.setVisibility(View.VISIBLE);
         if (filePath != null) {
             //displaying progress dialog while image is uploading
@@ -160,7 +162,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
-                                FileUpload fileUpload = new FileUpload(filename, downloadUri.toString());
+                                FileUpload fileUpload = new FileUpload(filename, description, downloadUri.toString());
 
                                 //saves the download url
                                 FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(fileUpload);
@@ -194,7 +196,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                     return;
                 }
                 else {
-                    uploadFile(filePath, editTextFilename.getText().toString());
+                    uploadFile(filePath, editTextFilename.getText().toString(), fileDescription.getText().toString());
                 }
                 break;
 
