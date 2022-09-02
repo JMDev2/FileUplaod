@@ -16,6 +16,9 @@
         android:theme="@style/Theme.FileUpload"
         tools:targetApi="31">
         <activity
+            android:name=".ViewPdfFilesActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity android:name=".UserProfile">

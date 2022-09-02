@@ -25,6 +25,8 @@
         <entry key="app/src/main/res/layout/activity_view_files.xml" value="0.17889492753623187" />
         <entry key="app/src/main/res/layout/activity_view_image_files.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/activity_view_pdf.xml" value="0.17889492753623187" />
+        <entry key="app/src/main/res/layout/activity_view_pdf_files.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/pdfviewer.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/uploadsfile.xml" value="0.17889492753623187" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1" />
