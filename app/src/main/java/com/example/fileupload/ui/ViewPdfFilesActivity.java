@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.fileupload.R;
 import com.example.fileupload.adapters.FileAdapter;
@@ -25,6 +27,7 @@ public class ViewPdfFilesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FileAdapter fileAdapter;
     List<FileUpload> uploadList = new ArrayList<>();
+    ProgressBar progressBar;
 
     DatabaseReference databaseReference;
 
@@ -36,6 +39,9 @@ public class ViewPdfFilesActivity extends AppCompatActivity {
         uploadList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.view_pdf_recyclerView);
+        progressBar = findViewById(R.id.progressBarRecycler1);
+
+        progressBar.setVisibility(View.VISIBLE);
 
 
 
@@ -55,12 +61,14 @@ public class ViewPdfFilesActivity extends AppCompatActivity {
                 //displaying it to list
 //                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
 //                listView.setAdapter(adapter);
-
                 fileAdapter = new FileAdapter(getApplicationContext());
                 fileAdapter.setFileList(uploadList);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(fileAdapter);
+
+
+                progressBar.setVisibility(View.GONE);
 
 
 

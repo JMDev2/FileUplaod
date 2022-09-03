@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 
 import com.example.fileupload.R;
 import com.example.fileupload.adapters.ImageAdapters;
@@ -26,6 +28,7 @@ public class ViewImageActivity extends AppCompatActivity {
     ImageAdapters imageAdapters;
     List<ImageUpload> uploadList = new ArrayList<>();
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class ViewImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_image);
 
         recyclerView =(RecyclerView) findViewById(R.id.image_recyclerview);
+        progressBar = findViewById(R.id.progressBarImagerecycler);
+
+        progressBar.setVisibility(View.VISIBLE);
 
 
 
@@ -62,6 +68,8 @@ public class ViewImageActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(imageAdapters);
                 recyclerView.setHasFixedSize(true);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
