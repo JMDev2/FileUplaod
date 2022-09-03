@@ -43,19 +43,8 @@ public class ImageAdapters extends RecyclerView.Adapter<ImageAdapters.ImageViewH
     @Override
     public void onBindViewHolder(@NonNull ImageAdapters.ImageViewHolder holder, int position) {
         holder.bindImages(imageUploadList.get(position));
+        holder.bindImageListener(imageUploadList.get(position));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageUpload upload = imageUploadList.get(position);
-
-                //Opening the upload file in browser using the upload url
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(upload.getUrl()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -74,6 +63,7 @@ public class ImageAdapters extends RecyclerView.Adapter<ImageAdapters.ImageViewH
 
         public ImageViewHolder(@NonNull View itemView, List<ImageUpload> imageUploadList) {
             super(itemView);
+            context = itemView.getContext();
             image = itemView.findViewById(R.id.image);
             imageName = itemView.findViewById(R.id.image_name);
             imageDescription = itemView.findViewById(R.id.image1_description);
@@ -87,6 +77,19 @@ public class ImageAdapters extends RecyclerView.Adapter<ImageAdapters.ImageViewH
             Picasso.get().load(imageUpload.getUrl()).into(image);
             imageName.setText(imageUpload.getName());
             imageDescription.setText(imageUpload.getDescription());
+        }
+
+        public void bindImageListener(ImageUpload imageUpload) {
+            imageDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Opening the upload file in browser using the upload url
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(imageUpload.getUrl()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

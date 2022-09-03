@@ -21,17 +21,11 @@
         <activity
             android:name=".ui.ViewPdfFilesActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity2"
-            android:exported="false" />
         <activity android:name=".acounts.UserProfile" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fileupload.ui.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.ViewImageFiles"
-            android:exported="false" />
         <activity android:name=".ui.UploadFileActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -45,9 +39,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fileupload.ui.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.ViewPdfActivity"
-            android:exported="false" />
         <activity
             android:name=".acounts.CreateAccountActivity"
             android:exported="false" />

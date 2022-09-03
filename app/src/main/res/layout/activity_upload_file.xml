@@ -40,15 +40,16 @@
 
         <EditText
             android:id="@+id/description"
-            android:layout_width="369dp"
-            android:layout_height="46dp"
+            android:layout_width="398dp"
+            android:layout_height="61dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="27dp"
             android:layout_marginEnd="21dp"
             android:layout_marginBottom="446dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:layout_weight="4"
+            android:hint="Enter file Description"
             app:layout_constraintBottom_toTopOf="@+id/buttonUploadFile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,10 +57,10 @@
 
         <Button
             android:id="@+id/buttonUploadFile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Upload PDF"
+            android:layout_width="417dp"
+            android:layout_height="69dp"
             android:backgroundTint="@color/blue"
+            android:text="Upload PDF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

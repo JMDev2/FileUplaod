@@ -61,16 +61,16 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        signupText = (TextView) findViewById(R.id.signup_text);
-        mUserName = (EditText) findViewById(R.id.signup_username);
-        mEmail = (EditText) findViewById(R.id.signup_email);
-        mCountry = (EditText) findViewById(R.id.signup_country1);
-        mPhone = (EditText) findViewById(R.id.signup_phone);
-        mPassword = (EditText) findViewById(R.id.signup_password);
-        mConfirmPassword = (EditText) findViewById(R.id.signup_confirmpassword);
-        mButton = (Button) findViewById(R.id.login_button);
-        mSignUpProgressBar = (ProgressBar) findViewById(R.id.signup_progressBar);
-        mSignupImage = (ImageView) findViewById(R.id.signup_image);
+        signupText = findViewById(R.id.signup_text);
+        mUserName = findViewById(R.id.signup_username);
+        mEmail = findViewById(R.id.signup_email);
+        mCountry = findViewById(R.id.signup_country1);
+        mPhone = findViewById(R.id.signup_phone);
+        mPassword = findViewById(R.id.signup_password);
+        mConfirmPassword = findViewById(R.id.signup_confirmpassword);
+        mButton = findViewById(R.id.login_button);
+        mSignUpProgressBar = findViewById(R.id.signup_progressBar);
+        mSignupImage = findViewById(R.id.signup_image);
 
         signupText.setOnClickListener(this);
         mButton.setOnClickListener(this);
@@ -218,11 +218,17 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             mPassword.requestFocus();
             return;
         }
-        if(myPassword.length() < 6){
+        if(myPassword.length() < 6 && myPassword.isEmpty()){
             mPassword.setError("Min Password length should be 6 characters");
             mPassword.requestFocus();
             return;
         }
+        if(myConfirmPassword.isEmpty() && myConfirmPassword.length() < 6 && !myConfirmPassword.equals(myPassword)){
+            mConfirmPassword.setError("Password Must match");
+            mConfirmPassword.requestFocus();
+            return;
+        }
+
 
 
 

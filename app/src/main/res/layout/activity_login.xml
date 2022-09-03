@@ -114,7 +114,7 @@
                 android:layout_marginTop="12dp"
                 android:ems="10"
                 android:hint="Enter Your Password"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.559"
                 app:layout_constraintStart_toStartOf="parent"
@@ -134,8 +134,8 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="222dp"
-        android:layout_height="47dp"
+        android:layout_width="220dp"
+        android:layout_height="51dp"
         android:layout_marginTop="170dp"
         android:backgroundTint="@color/blue"
         android:text="Button"

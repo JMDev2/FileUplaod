@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mImageUpload = (ImageView) findViewById(R.id.uploadimage);
-        mFileUpload = (ImageView) findViewById(R.id.uploadfile);
-        viewPdf = (TextView) findViewById(R.id.open_file);
-        viewImage = (TextView) findViewById(R.id.open_image);
-        mTime = (TextView) findViewById(R.id.time);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mImageUpload = findViewById(R.id.uploadimage);
+        mFileUpload = findViewById(R.id.uploadfile);
+        viewPdf = findViewById(R.id.open_file);
+        viewImage = findViewById(R.id.open_image);
+        mTime = findViewById(R.id.time);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         mImageUpload.setOnClickListener(this);
         mFileUpload.setOnClickListener(this);
@@ -58,12 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //Opening the phone dialer Intent
                 switch (item.getItemId()) {
                     case R.id.page_1:
                         Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                                 Uri.parse("tel:" + "0700898437"));
                         startActivity(phoneIntent);
                         break;
+                //Email intent on the bottom navigation ba
 
                     case R.id.page_2:
                         try {
@@ -88,9 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
-
-    //the logout methods
+    //the logout menu methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -112,11 +112,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    //Opening the user profile
     private void profile() {
         Intent userProfile = new Intent(MainActivity.this, UserProfile.class);
         startActivity(userProfile);
     }
 
+    //Logging out Intent
     private void logout() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //navigation intents
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

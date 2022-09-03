@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fileupload.R;
 import com.example.fileupload.models.Constants;
@@ -142,6 +143,9 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
                         ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString(),imagedescription);
                         FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(imageUpload);
 
+
+                        Toast.makeText(UploadImageActivity.this, "Upload complete", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
 
                     } else {
                         // Handle failures

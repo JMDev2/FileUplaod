@@ -86,12 +86,8 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        //creating an intent for file chooser
-//        Intent intent = new Intent();
-//        intent.setType("application/pdf");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_PDF_CODE);
     }
+    //Choosing the file method and Intent
     private void fileChooser() {
         Intent intent = new Intent();
         intent.setType("application/pdf");
@@ -100,6 +96,8 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+
+    //The Onactivity method
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -108,8 +106,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
             //if a file is selected
             filePath = data.getData();
             if (data.getData() != null) {
-                //uploading the file
-//                uploadFile(data.getData(), editTextFilename.getText().toString());
+
             }
             else {
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
@@ -118,9 +115,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    //this method is uploading the file
-    //the code is same as the previous tutorial
-    //so we are not explaining it
+    //This method is uploading the file sourced from documentation
     private void uploadFile(Uri data, String filename, String description) {
 //        progressBar.setVisibility(View.VISIBLE);
         if (filePath != null) {
@@ -140,6 +135,7 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                             //displaying the upload progress
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+
                         }
                     }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
@@ -165,6 +161,8 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                                 String fileId = reference.getKey();
                                 fileUpload.setID(fileId);
                                 reference.setValue(fileUpload);
+                                Toast.makeText(UploadFileActivity.this, "Upload complete", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             } else {
 
                                 // Handle failures
@@ -173,7 +171,6 @@ public class UploadFileActivity extends AppCompatActivity implements View.OnClic
                         }
                     });
         }else {
-            //display an error if no file is selected
         }
 
 

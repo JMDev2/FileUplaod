@@ -104,6 +104,8 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
 
             });
 
+
+            //deleting the file from firebase
             fileDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
