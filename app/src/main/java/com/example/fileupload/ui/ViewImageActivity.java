@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import com.example.fileupload.R;
 import com.example.fileupload.adapters.ImageAdapters;
 import com.example.fileupload.models.Constants;
 import com.example.fileupload.models.ImageUpload;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +31,7 @@ public class ViewImageActivity extends AppCompatActivity {
     List<ImageUpload> uploadList = new ArrayList<>();
     DatabaseReference databaseReference;
     ProgressBar progressBar;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,16 @@ public class ViewImageActivity extends AppCompatActivity {
 
         recyclerView =(RecyclerView) findViewById(R.id.image_recyclerview);
         progressBar = findViewById(R.id.progressBarImagerecycler);
+        floatingActionButton = findViewById(R.id.floatingActionButtonImage);
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewImageActivity.this, UploadImageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         progressBar.setVisibility(View.VISIBLE);
 
