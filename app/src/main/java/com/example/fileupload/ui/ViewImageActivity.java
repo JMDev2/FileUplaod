@@ -64,6 +64,7 @@ public class ViewImageActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                uploadList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ImageUpload upload = postSnapshot.getValue(ImageUpload.class);
                     uploadList.add(upload);

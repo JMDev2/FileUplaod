@@ -141,8 +141,10 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         ImageUpload imageUpload = new ImageUpload(imagename, downloadUri.toString(),imagedescription);
-                        FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(imageUpload);
-
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS_images).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push();
+                        String fileId = reference.getKey();
+                        imageUpload.setRef(fileId);
+                        reference.setValue(imageUpload);
 
                         Toast.makeText(UploadImageActivity.this, "Upload complete", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();

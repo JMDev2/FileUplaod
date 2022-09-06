@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
     private Context context;
@@ -109,7 +110,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
             fileDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(fileUpload.getID());
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS).child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).child(fileUpload.getID());
                     reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -65,6 +65,7 @@ public class ViewPdfFilesActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                uploadList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     FileUpload upload = postSnapshot.getValue(FileUpload.class);
                     uploadList.add(upload);
