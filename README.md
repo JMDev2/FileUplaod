@@ -1,4 +1,7 @@
 # FileUploads
+![](images/mainpage.png);
+![](images/uplaodfile.jpeg)
+![](images/viewfile.png)
 A mobile application that helps  you to upload your files remotely for easy and convient access
 ## Description
 The file uploads is a mobile applictaion build on purely java language. It comprises of firebsae authentication that allows users to create their accounts and there after loggin in. They can upload their files and images on firebase cloud, view them online or download them locally.
