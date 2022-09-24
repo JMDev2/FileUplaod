@@ -156,53 +156,21 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="255dp"
-        android:layout_marginBottom="11dp"
         android:text="Categories"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="LAST UPDATE"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintEnd_toStartOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="12dp"
         android:layout_height="19dp"
         android:layout_marginTop="11dp"
-        android:text=":"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/time"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="67dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="227dp"
-        android:text="Time"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/FILES"

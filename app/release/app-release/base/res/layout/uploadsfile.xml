@@ -1,0 +1,16 @@
+
+á
+;
+android*http://schemas.android.com/apk/res/android
+4
+app'http://schemas.android.com/apk/res-autoLinearLayout"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ*˜
+!androidx.cardview.widget.CardView"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"S
+*http://schemas.android.com/apk/res/androidlayout_height217dp"(õ„2:h²*²
+©	ImageView"e
+*http://schemas.android.com/apk/res/androidid@+id/imageView4"(Ğ„2
+…‚ øid/imageView40"R
+*http://schemas.android.com/apk/res/androidlayout_width224dp"(ô„2:hÀ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ	

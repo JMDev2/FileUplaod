@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.fileupload" >
+    package="com.uploads.fileupload" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,37 +16,37 @@
         android:theme="@style/Theme.FileUpload"
         tools:targetApi="31" >
         <activity
-            android:name=".ui.ViewImageActivity"
+            android:name="com.uploads.fileupload.ui.ViewImageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ViewPdfFilesActivity"
+            android:name="com.uploads.fileupload.ui.ViewPdfFilesActivity"
             android:exported="false" />
-        <activity android:name=".acounts.UserProfile" >
+        <activity android:name="com.uploads.fileupload.acounts.UserProfile" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fileupload.ui.MainActivity" />
+                android:value="com.uploads.fileupload.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.UploadFileActivity" >
+        <activity android:name="com.uploads.fileupload.ui.UploadFileActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fileupload.ui.MainActivity" />
+                android:value="com.uploads.fileupload.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".acounts.ForgotPassword"
+            android:name="com.uploads.fileupload.acounts.ForgotPassword"
             android:exported="false" />
-        <activity android:name=".ui.UploadImageActivity" >
+        <activity android:name="com.uploads.fileupload.ui.UploadImageActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fileupload.ui.MainActivity" />
+                android:value="com.uploads.fileupload.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".acounts.CreateAccountActivity"
+            android:name="com.uploads.fileupload.acounts.CreateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.uploads.fileupload.ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".acounts.LoginActivity"
+            android:name="com.uploads.fileupload.acounts.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

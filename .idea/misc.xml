@@ -34,6 +34,8 @@
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1" />
         <entry key="app/src/main/res/menu/profile.xml" value="0.19375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3575" />
       </map>
     </option>
   </component>

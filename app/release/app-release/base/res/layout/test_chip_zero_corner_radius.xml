@@ -1,0 +1,15 @@
+
+Õ
+;
+android*http://schemas.android.com/apk/res/android
+4
+app'http://schemas.android.com/apk/res-auto%com.google.android.material.chip.Chip"q
+*http://schemas.android.com/apk/res/androidid@+id/zero_corner_chip"(Ğ„2
+Ï„ øid/zero_corner_chip0"tstyle,@style/Widget.MaterialComponents.Chip.Action"29
+7Ã‡Äø+style/Widget.MaterialComponents.Chip.Action0ÿÿ"`
+*http://schemas.android.com/apk/res/androidlayout_widthwrap_content"(ô„2:0şÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"K
+*http://schemas.android.com/apk/res/android	ellipsizeend"(«„2:0"l
+*http://schemas.android.com/apk/res/androidtext@string/chip_text"(Ï‚„2
+£€Àøstring/chip_text0"P
+'http://schemas.android.com/apk/res-autochipCornerRadius0dp"(§Œø2:h

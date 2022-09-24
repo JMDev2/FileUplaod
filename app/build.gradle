@@ -4,10 +4,11 @@ plugins {
 }
 
 android {
+
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.fileupload"
+        applicationId "com.uploads.fileupload"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -15,6 +16,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {
