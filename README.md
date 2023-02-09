@@ -28,6 +28,14 @@ The file uploads is a mobile applictaion build on purely java language. It compr
 * Uploading images and files
 * Viewing and downloading the files and images at your personal convinience
 
+## Known Bugs
+The application breaks when one omits to edit the image profile. (PLEASE DONT FORGET THIS PART). I am working to resolve this error.
+
+## Credentials
+* I have created a user for easy access to the app:
+* Email: johndoe@gmail.com
+* Password: 123456
+
 
 ## Technologies Used
 

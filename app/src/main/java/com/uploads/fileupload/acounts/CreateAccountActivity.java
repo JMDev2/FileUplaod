@@ -3,6 +3,7 @@ package com.uploads.fileupload.acounts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private ProgressBar mSignUpProgressBar;
     private ImageView mSignupImage;
 
+
     private FirebaseAuth mAuth;
 
 
@@ -56,6 +58,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mButton = findViewById(R.id.login_button);
         mSignUpProgressBar = findViewById(R.id.signup_progressBar);
         mSignupImage = findViewById(R.id.signup_image);
+
 
         signupText.setOnClickListener(this);
         mButton.setOnClickListener(this);
@@ -129,7 +133,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         StorageReference ref = storage.getReference().child("images/" );
 
-        UploadTask uploadTask = ref.putFile(imageUri);
+            UploadTask uploadTask = ref.putFile(imageUri);
+
+
+
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
@@ -140,6 +147,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
                 // Continue with the task to get the download URL
                 return ref.getDownloadUrl();
+
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
